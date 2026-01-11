@@ -1,0 +1,22 @@
+// .options {
+//   display: flex;
+//   flex-direction: column;   
+//   gap: 12px;
+// }
+
+mat-radio-button {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.options mat-radio-button {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: 0.2s ease;
+}
+
+.options mat-radio-button:hover {
+  background: #f5f7ff;
+  border-color: #667eea;
+}

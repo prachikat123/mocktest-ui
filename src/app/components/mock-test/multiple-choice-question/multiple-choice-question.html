@@ -1,0 +1,10 @@
+<div class="options">
+  <mat-checkbox
+    *ngFor="let opt of question.answerSet?.answerSet"
+    [checked]="question | selectAnswerRadio : opt.value"
+    [value]="opt.value"
+    (change)="toggle(opt.value, $event.checked)"
+  >
+    {{ opt.text }}
+  </mat-checkbox>
+</div>

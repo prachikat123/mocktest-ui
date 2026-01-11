@@ -1,0 +1,49 @@
+.auth-wrapper {
+  height: 100vh;
+  background: linear-gradient(135deg, #e3eafc, #f9f9f9);
+}
+
+.auth-box {
+  width: 900px;
+  height: 550px;
+  border-radius: 20px;
+  background: #ffffff;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Left and Right panels */
+.panel {
+  width: 45%;
+  background: linear-gradient(135deg, #058f76, #058f76);
+  transition: 0.4s ease;
+}
+
+.form-box {
+  width: 55%;
+  background: #ffffff;
+  position: relative;
+ 
+}
+
+.sign-up-btn:hover {
+    color: #058f76 !important;
+}
+
+/* Animation */
+.form {
+  position: absolute;
+  width: 100%;
+  padding: 50px;
+  top: 0;
+  transition: transform .5s ease, opacity .4s;
+}
+.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+.hide {
+  transform: translateX(100%);
+  opacity: 0;
+}

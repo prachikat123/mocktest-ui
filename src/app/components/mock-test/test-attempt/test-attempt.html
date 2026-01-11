@@ -1,0 +1,51 @@
+<div class="exam-header">
+  <div>Question {{ currentIndex + 1 }} of {{ questions.length }}</div>
+  <div class="timer">
+    {{ formattedTime }}
+  </div>
+</div>
+
+<!-- Question Panel -->
+<div class="exam-body">
+  <div class="question-panel">
+    <div class="question-content" *ngIf="questions.length > 0 && questions[currentIndex]">
+      <h3 class="question-text">
+        {{ currentIndex + 1 }}.
+        {{ questions[currentIndex].questionText }}
+      </h3>
+
+      @switch (questions[currentIndex].typeName) { @case ('SingleChoice') {
+      <app-single-choice-question [question]="questions[currentIndex]" />
+      } @case ('MultipleChoice') {
+      <app-multiple-choice-question [question]="questions[currentIndex]" />
+      } @case ('TrueFalse') {
+      <app-true-false-question [question]="questions[currentIndex]" />
+      } }
+    </div>
+    <!-- Navigation -->
+  <div class="navigation">
+    <button (click)="previous()" [disabled]="currentIndex === 0">Previous</button>
+
+    <button (click)="markForReview()">Mark For Review</button>
+
+    <button *ngIf="currentIndex < questions.length - 1" (click)="next()">Next</button>
+
+    <button *ngIf="currentIndex === questions.length - 1" (click)="submitTest()">Submit</button>
+  </div>
+  </div>
+
+  <!-- question Status Map -->
+  <div class="status-panel">
+    <div class="status-header">
+    <h4>Questions</h4>
+    <button id="submit-btn" (click)="submitTest()">Submit</button>
+    </div>
+    <button id="questionBtn" *ngFor="let q of questions; let i = index" [ngClass]="q.status" (click)="jumpInto(i)">
+      {{ i + 1 }}
+    </button>
+  </div>
+  
+  
+
+  
+</div>

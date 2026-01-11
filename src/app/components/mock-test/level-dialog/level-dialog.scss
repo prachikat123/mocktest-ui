@@ -1,0 +1,14 @@
+.level-option{
+    display:block;
+    margin-bottom: 12px;
+}
+
+::ng-deep mat-radio-button{
+    display:block;
+    margin-bottom: 12px;
+    color: #000 !important;
+}
+
+::ng-deep .mat-radio-label-content{
+    font-size: 16px;
+}

@@ -1,0 +1,59 @@
+<h2>Available Mock Tests</h2>
+
+<div class="filter-bar mb-4">
+  <mat-form-field appearance="outline" class="me-3">
+  <mat-label>Subject</mat-label>
+
+  <mat-select [(ngModel)]="selectedSubject" (selectionChange)="applyFilters()">
+
+    <mat-option *ngFor="let s of subjects" [value]="s">
+      {{ s ? s : 'All' }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+  <mat-chip-listbox>
+  <mat-chip-option
+    *ngFor="let level of levels"
+    [selected]="selectedLevel === level"
+    (click)="filterByLevel(level)">
+    {{ level ? level : 'All' }}
+  </mat-chip-option>
+</mat-chip-listbox>
+
+</div>
+
+
+<div class="row">
+  <div class="col-md-4 mb-4" *ngFor="let test of filteredTests">
+
+    <mat-card class="h-100">
+
+      <mat-card-header>
+        <mat-card-title>{{ test.testName }}</mat-card-title>
+
+        <!-- LEVEL CHIP -->
+        <mat-chip
+          class="ms-auto"
+          [ngClass]="test.levelName.toLowerCase()">
+          {{ test.levelName }}
+        </mat-chip>
+
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>Questions: {{ test.totalQuestions }}</p>
+        <p>Marks: {{ test.totalMarks }}</p>
+        <p>Duration: {{ test.durationInMinutes }} mins</p>
+      </mat-card-content>
+
+      <mat-card-actions class="d-flex justify-content-end">
+        <button mat-raised-button color="primary" (click)="startTest(test)" >Start Test</button>
+      </mat-card-actions>
+
+    </mat-card>
+
+  </div>
+</div>
+
+

@@ -1,0 +1,86 @@
+<!-- <div class="auth-wrapper d-flex justify-content-center align-items-center"> -->
+  <div class="auth-box d-flex m-auto">
+
+    
+        @if (isSignup) {
+            <div class="panel left-panel d-flex flex-column justify-content-center align-items-center text-white p-5">
+                <h2 class="fw-bold text-center">Welcome Back!</h2>
+                <p class="text-center mt-2">To keep connected with us please login with your personal info</p>
+                <button  class="btn btn-outline-light text-white w-100 mt-4 px-4 sign-up-btn" (click)="showLogin()">SIGN IN</button>
+            </div>
+        } @else {
+            <div class="panel right-panel d-flex flex-column justify-content-center align-items-center text-white p-5">
+                <h2 class="fw-bold text-center">Hello, Friend!</h2>
+                <p class="text-center mt-2">Enter your personal details and start your journey with us</p>
+                <button class="btn btn-outline-light text-white w-100 mt-4 px-4 sign-up-btn" (click)="showSignup()">SIGN UP</button>
+            </div>
+        }
+    
+    <!-- Form Content -->
+    <div class="form-box" style="height: 500px;">
+
+      <div class="form animate" [ngClass]="isSignup ? 'hide' : 'show'">
+        <h3 class="fw-bold text-center mb-3">Login</h3>
+        <form [formGroup]="loginForm" (ngSubmit)="onSumbmit()">
+          <input type="email" placeholder="Email" class="form-control mb-2" formControlName="email">
+          @if(email?.hasError('required')){
+            <span class="text-danger">*</span>
+          }
+          @if(email?.invalid &&(email?.dirty || email?.touched)){
+            <span class="text-danger small">Please Enter valid Email</span>
+          }
+          <br>
+          <input type="password" placeholder="Password" class="form-control mb-2 mt-3 " formControlName="password">
+          @if(password?.hasError('required')){
+            <span class="text-danger">*</span>
+          }
+           @if(password?.hasError('minlength')){
+            <span class="text-danger small">Password must be minimum 8 characters</span>
+          }
+         
+          <br>
+          <button style="background: linear-gradient(135deg, #058f76, #058f76); border:none" class="text-white w-100 mt-3">LOGIN</button>
+        </form>
+        
+      </div>
+
+      <div class="form animate" [ngClass]="isSignup ? 'show' : 'hide'">
+        <h3 class="fw-bold text-center mb-3">Create Account</h3>
+        <form [formGroup]="signupForm" (ngSubmit)="signUp()">
+          <input type="text" placeholder="Name" class="form-control mb-2" formControlName="Name">
+          @if(Name?.hasError('required')){
+            <span class="text-danger">*</span>
+          }
+          <br>
+          <input type="email" placeholder="Email" class="form-control mb-2 mt-3 " formControlName="Email">
+         @if(Email?.hasError('required')){
+            <span class="text-danger">*</span>
+          }
+          @if(Email?.invalid &&(Email?.dirty || Email?.touched)){
+            <span class="text-danger small">Please Enter valid Email</span>
+          }
+          <br>
+          <input type="password" placeholder="Password" class="form-control mb-2 mt-3 " formControlName="Password">
+           @if(Password?.hasError('required')){
+            <span class="text-danger">*</span>
+          }
+          @if(Password?.invalid &&(Password?.dirty || Password?.touched)){
+            <span class="text-danger small">Please Enter Strong Password</span>
+          }
+          <br>
+          <input type="password" placeholder="confirm Password" class="form-control mb-2 mt-3 " formControlName="CnfmPass">
+          @if(CnfmPass?.hasError('required') && (CnfmPass?.dirty || CnfmPass?.touched)){
+            <span class="text-danger">*</span>
+          }
+          @if(signupForm.hasError('passwordMismatch') && CnfmPass?.touched){
+            <span class="text-danger small">Password not match</span>
+          }
+          <br>
+          <button type="submit" [disabled]="signupForm.invalid" class="btn btn-primary w-100 mt-3" >SIGN UP</button>
+        </form>
+        
+      </div>
+
+    </div>
+  </div>
+<!-- </div> -->
