@@ -84,15 +84,16 @@ export class TestList implements OnInit {
   }
 
   startTest(test: MockTestModel) {
-    this.service.startTest(test.testId).subscribe(() => {
+    // this.service.startTest(test.testId).subscribe(() => {
       this.router.navigate(['/mock-test'], {
         queryParams: {
+          testId: test.testId,
           subjectId: test.subjectId,
           levelId: test.levelId,
           duration: test.durationInMinutes,
         }
       });
-    });
+    // });
   }
 
   filterByLevel(level: string) {

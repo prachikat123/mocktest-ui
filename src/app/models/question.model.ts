@@ -13,4 +13,5 @@ export interface QuestionModel {
   answerSet: {answerSet: AnswerSet[]} | any;
   status ?:'unanswered' | 'answered' | 'review';
   givenAnswer?: string[];
+  givenAnswerValue?: boolean; 
 }

@@ -1,5 +1,12 @@
-<mat-radio-group class="options" (change)="onChange($event.value)">
-  <mat-radio-button [checked]="question | selectAnswerRadio:opt.value" *ngFor="let opt of question.answerSet?.answerSet" [value]="opt.value">
+<mat-radio-group 
+class="options" 
+[(ngModel)]="question.givenAnswerValue"
+(change)="onChange($event.value)">
+
+  <mat-radio-button 
+  *ngFor="let opt of question.answerSet?.answerSet" [value]="opt.value">
     {{ opt.text }}
   </mat-radio-button>
 </mat-radio-group>
+
+<!-- [checked]="question | selectAnswerRadio:opt.value" -->

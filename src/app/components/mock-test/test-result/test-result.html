@@ -1,3 +1,65 @@
-<h2>Test Result</h2>
-<p>Score: {{result?.Score}}</p>
-<p>Total Questions :{{result?.total}}</p>
+<!-- <div class="result-card" *ngIf="result">
+    <h2>{{result.testName }} - Result</h2>
+
+    <p>Score: <b>{{ result.score }}</b></p>
+    <p>Correct: {{ result.correct }}</p>
+    <p>Wrong: {{ result.wrong }}</p>
+    <p>Status: {{ result.status }}</p>
+
+    <hr>
+
+    <div *ngFor="let q of result.questionResultModel">
+        <p>
+            QID :{{q.questionId}} |
+            Selected :{{q.selectedAnswer}} |
+            <span [style.color]="q.isCorrect ? 'green' : 'red'">
+                {{  q.isCorrect ? 'Correct' : 'Wrong' }}
+            </span>
+        </p>
+    </div>
+</div> -->
+
+<div class="result-container" *ngIf="result">
+  <h2>{{ result.testName }} - Result</h2>
+
+  <div class="score-grid">
+    <div class="box total">
+      <h3>{{ result.totalQuestions }}</h3>
+      <p>Total</p>
+    </div>
+
+    <div class="box correct">
+      <h3>{{ result.correct }}</h3>
+      <p>Correct</p>
+    </div>
+
+    <div class="box wrong">
+      <h3>{{ result.wrong }}</h3>
+      <p>Wrong</p>
+    </div>
+
+    <div class="box score">
+      <h3>{{ result.score }}</h3>
+      <p>Score</p>
+    </div>
+
+    <div class="progress">
+      <div class="bar">
+        <div class="fill" [style.width.%]="percentage"></div>
+      </div>
+      <span>{{ percentage }}%</span>
+    </div>
+
+    <h3>Question-wise Result</h3>
+
+    <div class="question-row" *ngFor="let q of result.questionResults; index as i">
+      <div>Q{{ i + 1 }} &nbsp;
+        <span class="badge" [class.correct]="q.isCorrect" [class.wrong]="!q.isCorrect">
+          {{ q.isCorrect ? 'Correct' : 'Wrong' }}
+        </span>
+      </div>
+
+      <div *ngIf="q.selectedAnswer"><pre style="margin-bottom: 3px;">Your Answer:</pre> {{ q.selectedAnswer }}</div>
+    </div>
+  </div>
+</div>

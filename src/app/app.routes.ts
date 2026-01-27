@@ -5,6 +5,7 @@ import { AuthGuard } from './services/guard/auth-guard';
 import { LoginGuard } from './services/guard/login.guard';
 import { TestSubject } from './components/mock-test/test-subject/test-subject';
 import { TestAttempt } from './components/mock-test/test-attempt/test-attempt';
+import { TestResult } from './components/mock-test/test-result/test-result';
 
 export const routes: Routes = [
   { path: 'login', component: Login, canActivate: [LoginGuard] },
@@ -15,6 +16,7 @@ export const routes: Routes = [
   },
   {path: 'mock-test', component: TestAttempt, canActivate: [AuthGuard] },
   // { path: 'subjects', component: TestSubject, canActivate: [AuthGuard] },
+  {path : 'test-result/:attemptId', component:TestResult,canActivate:[AuthGuard]},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' },
 ];

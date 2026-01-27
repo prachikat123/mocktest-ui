@@ -19,10 +19,10 @@ import { TrueFalseQuestion } from '../true-false-question/true-false-question';
   ],
   templateUrl: './test-attempt.html',
   styleUrl: './test-attempt.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class TestAttempt implements OnInit, OnDestroy {
-  // mockTest: MockTestModel;
+  attemptId!: number;
   questions: QuestionModel[] = [];
   currentIndex = 0;
 
@@ -30,28 +30,76 @@ export class TestAttempt implements OnInit, OnDestroy {
   // questionStatus: { [questionId: number]: 'unanswered' | 'answered' | 'review' } = {};
 
   remainingTime!: number;
+  displayTime = '';
   timerInterval: any;
 
   constructor(
     private route: ActivatedRoute,
     private mockTestService: MockTestService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
+    const testId = Number(this.route.snapshot.queryParamMap.get('testId'));
     const subjectId = Number(this.route.snapshot.queryParamMap.get('subjectId'));
     const levelId = Number(this.route.snapshot.queryParamMap.get('levelId'));
     const duration = Number(this.route.snapshot.queryParamMap.get('duration'));
-    this.remainingTime = duration * 60;
 
     this.mockTestService.getQuestions(subjectId, levelId).subscribe((res) => {
       this.questions = res as QuestionModel[];
-    });
 
-    this.startTimer();
+      // this.startTimer();
+
+      const savedAttemptId = localStorage.getItem('attemptId');
+
+      if (savedAttemptId) {
+        this.attemptId = Number(savedAttemptId);
+        this.callRemainingTimeApi();
+      } else {
+        this.mockTestService.startTest(testId).subscribe((res2: any) => {
+          this.attemptId = res2.attemptId;
+
+          localStorage.setItem('attemptId', this.attemptId.toString());
+          this.remainingTime = duration * 60;
+          this.startTimer();
+          // this.callRemainingTimeApi();
+        });
+      }
+    });
   }
   ngOnDestroy() {
     clearInterval(this.timerInterval);
+  }
+
+  private callRemainingTimeApi(): void {
+    this.mockTestService.getRemainingTime(this.attemptId).subscribe({
+      next: (res) => {
+        console.log('API response', res);
+
+        const startTime = new Date(res.startTime).getTime();
+        const durationMs = res.durationInMinutes * 60 * 1000;
+        const endTime = startTime + durationMs;
+
+        const now = new Date().getTime();
+        const remainingMs = endTime - now;
+
+        if (remainingMs <= 0) {
+          this.timeUp();
+          return;
+        }
+        this.remainingTime = Math.floor(remainingMs / 1000);
+
+        this.startTimer();
+      },
+      error: (err) => {
+        console.error('API error', err);
+      },
+    });
+  }
+  timeUp() {
+    clearInterval(this.timerInterval);
+    alert('Time is over! Your test submitted.');
+    this.submitTest();
   }
 
   startTimer() {
@@ -91,17 +139,35 @@ export class TestAttempt implements OnInit, OnDestroy {
   }
 
   submitTest() {
-    console.log(this.questions);
-    /*     clearInterval(this.timerInterval);
+    // console.log(this.questions);
+    clearInterval(this.timerInterval);
+
+    localStorage.removeItem('attemptId');
 
     const payload = {
-      answers: this.answers,
+      attemptId: this.attemptId,
+      answers: this.questions.map((q) => ({
+        questionId: q.questionId,
+        selectedAnswer: Array.isArray(q.givenAnswer)
+          ? q.givenAnswer
+          : q.givenAnswer !== null
+            ? [String(q.givenAnswer)]
+            : [],
+      })),
     };
 
-    this.mockTestService.submitTest(payload).subscribe((res) => {
-      this.router.navigate(['/mock-test/result'], {
-        state: res,
-      });
-    }); */
+    console.log('SUBMIT PAYLOAD:', JSON.stringify(payload, null, 2));
+
+    this.mockTestService.submitTest(payload).subscribe({
+      next: (res) => {
+        this.router.navigate(['/test-result', res.attemptId]);
+        console.log('Submit success', res);
+      },
+      error: (err) => {
+        // //const validationErrors = err?.error?.errors || err?.message || 'Unknown error';
+        console.error('Submit failed', err);
+        alert('Something went wrong while submitting the test');
+      },
+    });
   }
 }
