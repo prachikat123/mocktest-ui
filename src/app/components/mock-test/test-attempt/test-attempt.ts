@@ -148,11 +148,7 @@ export class TestAttempt implements OnInit, OnDestroy {
       attemptId: this.attemptId,
       answers: this.questions.map((q) => ({
         questionId: q.questionId,
-        selectedAnswer: Array.isArray(q.givenAnswer)
-          ? q.givenAnswer
-          : q.givenAnswer !== null
-            ? [String(q.givenAnswer)]
-            : [],
+        selectedAnswer: Array.isArray(q.givenAnswer) ? q.givenAnswer : [],
       })),
     };
 

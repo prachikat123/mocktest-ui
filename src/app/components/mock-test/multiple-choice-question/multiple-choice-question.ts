@@ -13,15 +13,13 @@ import { SelectAnswerRadioPipe } from '../../../pipes/selectRadioAnswer/select-a
 export class MultipleChoiceQuestion {
   @Input({ required: true }) question!: QuestionModel;
 
-  selectedValues:string[]=[];
 
   toggle(value:any, checked:boolean){
      if (checked) {
-      this.selectedValues.push(value);
+      this.question.givenAnswer.push(value);
     } else {
-      this.selectedValues = this.selectedValues.filter(v => v !== value);
+      this.question.givenAnswer = this.question.givenAnswer.filter(v => v !== value);
     }
-    this.question.givenAnswer = this.selectedValues;
 
     if (this.question.givenAnswer && this.question.givenAnswer.length) {
       this.question.status = 'answered';
