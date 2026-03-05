@@ -1,59 +1,143 @@
-# SampleA20
+</> Markdown
+# Online Mock Test Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.13.
+##  Overview
+The Online Mock Test Application is a full-stack web application that allows users to log in, select a test, attempt quiz questions, and view their results after submission.
 
-## Development server
+The application is built using **Angular for the frontend** and **ASP.NET Web API for the backend**, providing a smooth and interactive quiz experience.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+##  Features
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- User Login
+- Test selection from available quizzes
+- Questions displayed one by one
+- Option to select an answer
+- Option to skip questions
+- Submit test functionality
+- Result page displaying:
+  - Total score
+  - Correct answers
+  - Wrong answers
+  - Non-attempted questions
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+##  Tech Stack
 
-```bash
-ng generate component component-name
-```
+### Frontend
+- Angular
+- TypeScript
+- HTML
+- CSS
+- Bootstrap
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Backend
+- ASP.NET Web API
+- C#
 
-```bash
-ng generate --help
-```
+### Tools & Platforms
+- Visual Studio Code
+- Visual Studio
+- Git
+- GitHub
 
-## Building
+---
 
-To build the project run:
+##  Application Workflow
 
-```bash
-ng build
-```
+1. User opens the application.
+2. User logs in using their credentials.
+3. After successful login, the **Home Page** appears.
+4. User selects a test from the available list.
+5. User clicks **Start Test**.
+6. Questions are displayed one by one.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+User can:
+- Select an answer
+- Skip the question
 
-## Running unit tests
+7. After completing the quiz, the user clicks **Submit**.
+8. The application processes the responses.
+9. The **Result Page** displays:
+   - Total Score
+   - Correct Answers
+   - Wrong Answers
+   - Non-Attempted Questions
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+---
 
-```bash
-ng test
-```
+##  Frontend–Backend Interaction
 
-## Running end-to-end tests
+- Angular sends API requests to the **ASP.NET Web API**.
+- The Web API processes the request and returns quiz data.
+- Angular displays questions and submits answers.
+- The backend evaluates the answers and returns the result.
 
-For end-to-end (e2e) testing, run:
+---
 
-```bash
-ng e2e
-```
+##  Installation & Setup
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### 1️. Clone the Repository
+git clone https://github.com/your-username/quiz-application.git
 
-## Additional Resources
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### 2️. Run Backend (ASP.NET Web API)
+
+1. Open the backend project in **Visual Studio**
+2. Build and run the Web API
+
+---
+
+### 3️. Run Frontend (Angular)
+
+Install dependencies
+
+Run the Angular application
+
+Open in browser
+http://localhost:4200
+
+
+---
+
+##  Screenshots
+
+## 📷 Screenshots
+
+### Login Page
+![Login Page](screenshots/login.png)
+
+### Home Page
+![Home Page](screenshots/home.png)
+
+### Quiz Page
+![Quiz Page](screenshots/quiz.png)
+
+### Result Page
+![Result Page](screenshots/result.png)
+
+You can include screenshots for:
+- Login Page
+- Home Page
+- Quiz Page
+- Result Page
+
+---
+
+## 💡 Future Improvements
+
+- Add quiz timer
+- Store results in database
+- Admin panel for managing quizzes
+- Detailed performance analytics
+
+---
+
+## 👩‍💻 Author
+
+**Prachi Sonkusare**  
+Angular & .NET Developer
+
+
