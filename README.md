@@ -7,7 +7,7 @@
 ![Git](https://img.shields.io/badge/VersionControl-Git-orange)
 ![GitHub](https://img.shields.io/badge/Repository-GitHub-black)
 
-##  Overview
+##  Project Overview
 The Online Mock Test Application is a full-stack web application that allows users to log in, select a test, attempt quiz questions, and view their results after submission.
 
 The application is built using **Angular for the frontend** and **ASP.NET Web API for the backend**, providing a smooth and interactive quiz experience.
