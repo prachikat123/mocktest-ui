@@ -20,7 +20,7 @@
 </div> -->
 
 <div class="result-container" *ngIf="result">
-  <h2>{{ result.testName }} - Result</h2>
+  <h2 *ngIf="result">{{ result.testName }} - Result</h2>
 
   <div class="score-grid">
     <div class="box total">
@@ -50,9 +50,39 @@
       <span>{{ percentage }}%</span>
     </div>
 
-    <h3>Question-wise Result</h3>
+    <h3 class="section-title">Attempted Questions({{ attemptedQuestions.length }})</h3>
 
-    <div class="question-row" *ngFor="let q of result.questionResults; index as i">
+    <div *ngFor="let q of attemptedQuestions" class="question-card">
+      <div class="badge" [ngClass]="q.isCorrect ? 'correct' : 'wrong'">
+        <b>Q:</b> {{ q.questionId }}
+        {{ q.isCorrect ? 'Correct' : 'Wrong' }}
+      </div>
+
+      <!-- <p></p> -->
+
+      <p>
+        <b>Your Answer:</b>
+        {{ q.selectedAnswer?.join(', ') }}
+      </p>
+
+      <div
+        class="view-answer"
+        *ngIf="q.correctAnswer && q.correctAnswer.length"
+        (click)="showAnswer(q); $event.stopPropagation()"
+      >
+        <pre class="view-text"> <span class="eye-icon">👁</span> Correct Answer</pre>
+      </div>
+    </div>
+
+    <h3 class="section-title">Not Attempted Questions ({{ notAttemptedCount }})</h3>
+
+    <div *ngFor="let q of notAttemptedQuestions" class="question-card not-attempted">
+      <div class="badge skipped">Not Attempted</div>
+
+      <p><b>Q : </b>{{ q }}</p>
+    </div>
+
+    <!-- <div class="question-row" *ngFor="let q of result.questionResults; index as i">
       <div>Q{{ i + 1 }} &nbsp;
         <span class="badge" [class.correct]="q.isCorrect" [class.wrong]="!q.isCorrect">
           {{ q.isCorrect ? 'Correct' : 'Wrong' }}
@@ -60,6 +90,18 @@
       </div>
 
       <div *ngIf="q.selectedAnswer"><pre style="margin-bottom: 3px;">Your Answer:</pre> {{ q.selectedAnswer }}</div>
-    </div>
+    </div> -->
+  </div>
+</div>
+
+<div class="correct-ans-popup-backdrop" *ngIf="selectedQuestion && selectedQuestion.correctAnswer">
+  <div class="correct-ans-popup">
+    <h3>Correct Answer</h3>
+
+    <p>
+      {{ selectedQuestion.correctAnswer?.join(', ') }}
+    </p>
+
+    <button (click)="closePopup()">Close</button>
   </div>
 </div>

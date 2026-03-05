@@ -1,5 +1,9 @@
 export interface QuestionResultModel {
   questionId: number;
-  selectedAnswer: string;
-  isCorrect: boolean;
+  questionText: string;
+  isAttempted: boolean;
+  userAnswer: string[] | null;
+  correctAnswer: string[];
+  selectedAnswer: string[];
+  isCorrect: boolean | null;
 }

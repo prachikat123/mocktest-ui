@@ -1,4 +1,5 @@
 import { QuestionResultModel } from "./question-result.model";
+import { QuestionModel } from "./question.model";
 
 export interface TestResultModel {
   attemptId: number;
@@ -13,4 +14,5 @@ export interface TestResultModel {
   endTime: string;
   durationInMinutes: number;
   questionResults: QuestionResultModel[];
+  notAttemptedQuestions: QuestionResultModel[];
 }
