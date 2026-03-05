@@ -159,16 +159,6 @@ Fetch quiz result details.
   <img src="screenshots/result.png" width="800">
 </p>
 
-
----
-
-##  Future Improvements
-
-- Add quiz timer
-- Store results in database
-- Admin panel for managing quizzes
-- Detailed performance analytics
-
 ---
 
 ##  Installation & Setup
